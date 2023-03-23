@@ -10,6 +10,20 @@ class TodosController < ApplicationController
         end
     end
 
+    def update
+        todo = user.todos.find(params[:id]).update(todo_params)
+        if todo
+            app_response(data: {info: 'updated todo successfully'})
+        else 
+            app_response(message: 'Failed!', data: {info: 'Something went wrong, could not update Todo'})
+        end
+
+    end
+
+    def delete
+        todo = user.todos.find(params[:id]).destroy
+    end
+
     private
     def todo_params
         params.permit(:title, :description, :status, :priority)
