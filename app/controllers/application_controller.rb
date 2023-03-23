@@ -28,4 +28,9 @@ class ApplicationController < ActionController::API
             app_response(message: 'failed', status: 401, data: {info: 'Your session has expired, please login to continue'})
         end
     end
+
+    #get logged in user id
+    def user
+        User.find(session[:uid].to_i)
+    end
 end
